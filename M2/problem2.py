@@ -13,10 +13,10 @@ def process_array(num, arr):
     print(arr)
     total = 0
     # TODO add necessary code here for sum; every number must have two decimal places shown
-    totalArr = sum(arr)
-    total = ("{:.2f}".format(totalArr))
-    print("\nThe total is {}:\n".format(total))
-    # print(type(total))
+    for i in arr:
+        total += i
+    format_total = ("{:.2f}".format(total))
+    print("\nThe total is {}:\n".format(format_total))
 
 
 print("Problem 2")
