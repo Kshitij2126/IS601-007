@@ -1,4 +1,6 @@
 from enum import Enum
+
+from numpy import isin
 # make a tests folder under the folder you're putting these files in
 # add an empty __init__.py to the tests folder
 from IcecreamExceptions import ExceededRemainingChoicesException, InvalidChoiceException, NeedsCleaningException, OutOfStockException
@@ -137,7 +139,7 @@ class IceCreamMachine:
             self.pick_toppings(toppings)
 
     def handle_pay(self, expected, total):
-        if total == str(expected):
+        if str(total) == str(expected):
             print("Thank you! Enjoy your icecream!")
             self.total_icecreams += 1
             self.total_sales += expected  # only if successful
@@ -147,7 +149,13 @@ class IceCreamMachine:
 
     def calculate_cost(self):
         # TODO add the calculation expression/logic for the inprogress_icecream
-        return 10000
+        price = []
+        for i in self.inprogress_icecream:
+            price.append(i.cost)
+
+        total_price = sum(price)
+        format_total_price = "$" + "{:.2f}".format(total_price)
+        return str(format_total_price)
 
     def run(self):
         if self.currently_selecting == STAGE.Container:
