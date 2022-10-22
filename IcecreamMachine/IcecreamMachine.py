@@ -1,5 +1,4 @@
 from enum import Enum
-
 from numpy import isin
 # make a tests folder under the folder you're putting these files in
 # add an empty __init__.py to the tests folder
@@ -12,16 +11,22 @@ class Usable:
     quantity = 0
     cost = 99
 
-    def __init__(self, name, quantity=10, cost=99):
+    def __init__(self, name, quantity=1, cost=99):  # default quantity is 10
         self.name = name
         self.quantity = quantity
         self.cost = cost
 
     def use(self):
         self.quantity -= 1
-        if (self.quantity < 0):
-            raise OutOfStockException
-        return self.quantity
+        try:
+            if (self.quantity < 0):
+                raise OutOfStockException
+        except OutOfStockException:
+            return print("The Item requested is out of stock")
+        else:
+            if (self.quantity < 0):
+                self.quantity = 0
+            return self.quantity
 
     def in_stock(self):
         return self.quantity > 0
@@ -65,7 +70,6 @@ class IceCreamMachine:
     remaining_toppings = MAX_TOPPINGS
     total_sales = 0
     total_icecreams = 0
-
     inprogress_icecream = []
     currently_selecting = STAGE.Container
 
@@ -141,23 +145,27 @@ class IceCreamMachine:
     def handle_pay(self, expected, total):
         if str(total) == str(expected):
             print("Thank you! Enjoy your icecream!")
+            # removing the $ from the expected value and using the float to increment total sales - Kshitij Aji (ka598, Oct 19,2022)
+            expected_int = expected.replace("$", "")
             self.total_icecreams += 1
-            self.total_sales += expected  # only if successful
+            self.total_sales += float(expected_int)  # only if successful
             self.reset()
         else:
             raise InvalidPaymentException
 
     def calculate_cost(self):
         # TODO add the calculation expression/logic for the inprogress_icecream
+        # Initializing a new list to store all the costs from the inprogress_icecream list - Kshitij Aji (ka598, Oct 19, 2022)
         price = []
         for i in self.inprogress_icecream:
             price.append(i.cost)
-
+        # Using the sum function to find the total cost - Kshitij Aji (ka598, Oct 19,2022)
         total_price = sum(price)
         format_total_price = "$" + "{:.2f}".format(total_price)
         return str(format_total_price)
 
     def run(self):
+
         if self.currently_selecting == STAGE.Container:
             container = input(
                 f"Would you like a {', '.join(list(map(lambda c:c.name.lower(), filter(lambda c: c.in_stock(), self.containers))))}?\n")
