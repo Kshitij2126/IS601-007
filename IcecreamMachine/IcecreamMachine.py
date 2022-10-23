@@ -11,7 +11,7 @@ class Usable:
     quantity = 0
     cost = 99
 
-    def __init__(self, name, quantity=1, cost=99):  # default quantity is 10
+    def __init__(self, name, quantity=10, cost=99):  # change qty to 10 after finishing
         self.name = name
         self.quantity = quantity
         self.cost = cost
@@ -22,10 +22,8 @@ class Usable:
             if (self.quantity < 0):
                 raise OutOfStockException
         except OutOfStockException:
-            return print("The Item requested is out of stock")
+            print("Sorry, this item is out of stock!")
         else:
-            if (self.quantity < 0):
-                self.quantity = 0
             return self.quantity
 
     def in_stock(self):
@@ -53,7 +51,7 @@ class STAGE(Enum):
 
 class IceCreamMachine:
     # Constants https://realpython.com/python-constants/
-    USES_UNTIL_CLEANING = 100
+    USES_UNTIL_CLEANING = 100  # 100 default value
     MAX_SCOOPS = 3
     MAX_TOPPINGS = 3
 
@@ -90,13 +88,16 @@ class IceCreamMachine:
                 c.use()
                 self.inprogress_icecream.append(c)
                 return
-        raise InvalidChoiceException
+        print(InvalidChoiceException.error_message)
+        IceCreamMachine.start(self)
 
     def pick_flavor(self, choice):
         if self.remaining_uses <= 0:
-            raise NeedsCleaningException
+            print(NeedsCleaningException.error_message)
+            IceCreamMachine.clean_machine(self)
+            IceCreamMachine.start(self)
         if self.remaining_scoops <= 0:
-            raise ExceededRemainingChoicesException
+            print(ExceededRemainingChoicesException.error_message)
         for f in self.flavors:
             if f.name.lower() == choice:
                 f.use()
@@ -104,18 +105,18 @@ class IceCreamMachine:
                 self.remaining_scoops -= 1
                 self.remaining_uses -= 1
                 return
-        raise InvalidChoiceException
+        print(InvalidChoiceException.error_message)
 
     def pick_toppings(self, choice):
         if self.remaining_toppings <= 0:
-            raise ExceededRemainingChoicesException
+            print(ExceededRemainingChoicesException.error_message)
         for t in self.toppings:
             if t.name.lower() == choice:
                 t.use()
                 self.inprogress_icecream.append(t)
                 self.remaining_toppings -= 1
                 return
-        raise InvalidChoiceException
+        print(InvalidChoiceException.error_message)
 
     def reset(self):
         self.remaining_scoops = self.MAX_SCOOPS
@@ -151,7 +152,8 @@ class IceCreamMachine:
             self.total_sales += float(expected_int)  # only if successful
             self.reset()
         else:
-            raise InvalidPaymentException
+            print(InvalidPaymentException.error_message)
+            IceCreamMachine.start(self)
 
     def calculate_cost(self):
         # TODO add the calculation expression/logic for the inprogress_icecream
@@ -165,7 +167,6 @@ class IceCreamMachine:
         return str(format_total_price)
 
     def run(self):
-
         if self.currently_selecting == STAGE.Container:
             container = input(
                 f"Would you like a {', '.join(list(map(lambda c:c.name.lower(), filter(lambda c: c.in_stock(), self.containers))))}?\n")
