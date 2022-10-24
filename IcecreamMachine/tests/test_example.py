@@ -4,6 +4,8 @@ import pytest
 from IcecreamMachine import IceCreamMachine
 # this is an example test showing how to cascade fixtures to build up state
 
+# This was the example code - Kshitij Aji (ka598, Oct 23, 2022)
+
 
 @pytest.fixture
 def machine():
@@ -36,6 +38,9 @@ def test_production_line(second_order):
     assert second_order is not None
 '''
 
+# Test1 - Test to ensure that the first selection made by the user is the container -  Kshitij Aji (ka598, Oct 23,2022)
+# The test asserts True if the stage selected is the container
+
 
 def test_one(machine):
     from IcecreamMachine import STAGE
@@ -44,12 +49,18 @@ def test_one(machine):
     else:
         assert False
 
+# Test 2 - Test to check that the flavors can only be added if they are in stock - Kshitij Aji (ka598, Oct 23,2022)
+
 
 def test_two(machine):
     if machine.remaining_uses > 0:
         assert True
     elif machine.remaining_uses <= 0:
         assert False
+
+# Test 3 - This test is to verify that toppings can only be added to the ice cream if they are in stock - Kshitij Aji (ka598, Oct 23,2022)
+# If the remaining toppings are greater than 0, the test asserts True
+# and if the toppings are less than or equal to 0 the test asserts to False - Kshitij Aji (ka598, Oct 23,2022)
 
 
 def test_three(machine):
@@ -58,6 +69,9 @@ def test_three(machine):
     elif machine.remaining_toppings <= 0:
         assert False
 
+# if the remaining scoops is greater than 0 the test asserts True, and
+# if the remaining scoops is less than 0, the test asserts to False - Kshitij Aji (ka598, Oct 23,2022)
+
 
 def test_four(machine):
     if machine.remaining_scoops > 0:
@@ -65,12 +79,17 @@ def test_four(machine):
     elif machine.remaining_scoops <= 0:
         assert False
 
+# If the remaining_toppings is less than or equal to 3, the test asserts to True - Kshitij Aji (ka598, Oct 23,2022)
+
 
 def test_five(machine):
-    if machine.remaining_toppings > 0:
+    if machine.remaining_toppings <= 3:
         assert True
-    elif machine.remaining_toppings <= 0:
+    else:
         assert False
+
+# This test verifies that the calculate cost function
+# calculates the cost of the ice cream correctly based on the slections provided. - Kshitij Aji (ka598, Oct 23,2022)
 
 
 def test_six_one():
@@ -84,6 +103,10 @@ def test_six_one():
     cost1 = icm1.calculate_cost()
     assert cost1 == "$3.25"
 
+# This test verifies that the calculate cost function, calculates
+# the cost of the ice cream correctly based on the slections provided. - Kshitij Aji (ka598, Oct 23,2022)
+# Kshitij Aji (ka598, Oct 23,2022)
+
 
 def test_six_two():
     icm2 = IceCreamMachine()
@@ -95,6 +118,9 @@ def test_six_two():
     icm2.handle_toppings("done")
     cost2 = icm2.calculate_cost()
     assert cost2 == "$3.00"
+
+# This test verifies that the total sales are being correctly added by
+# totaling the costs for different icecreams - Kshitij Aji (ka598, Oct 23,2022)
 
 
 def test_seven():
@@ -123,6 +149,9 @@ def test_seven():
     cost = icm.calculate_cost()
     icm.handle_pay(cost, "$9.50")
     assert icm.total_sales == 9.50
+
+# This test verifies that the total number of
+# icecreams are being calculated correctly in the handle_pay function. - Kshitij Aji (ka598, Oct 23,2022)
 
 
 def test_eight():

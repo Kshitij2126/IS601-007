@@ -16,6 +16,7 @@ class Usable:
         self.quantity = quantity
         self.cost = cost
 
+    # Handling the OutofStockException in the use function of the Usableclass -  Kshitij Aji (ka598, Oct 23,2022)
     def use(self):
         self.quantity -= 1
         try:
@@ -23,6 +24,7 @@ class Usable:
                 raise OutOfStockException
         except OutOfStockException:
             print("Sorry, this item is out of stock!")
+        # If there is no exception it returns the quantity - Kshitij Aji (ka598, Oct 23,2022)
         else:
             return self.quantity
 
@@ -88,15 +90,25 @@ class IceCreamMachine:
                 c.use()
                 self.inprogress_icecream.append(c)
                 return
+        '''Custom error message is printed out from the InvalidchoiceException 
+        Class if the user inputs the wrong choice - Kshitij Aji (ka598, Oct 23,2022)'''
         print(InvalidChoiceException.error_message)
+        # The ice cream machine starts again to prompt the user to select a valid choice - Kshitij Aji (ka598, Oct 23,2022)
         IceCreamMachine.start(self)
 
     def pick_flavor(self, choice):
         if self.remaining_uses <= 0:
+            '''Custom error message is printed out from the NeedscleaningException 
+            Class if the remaining uses becomes less than 0 - Kshitij Aji (ka598, Oct 23,2022)'''
             print(NeedsCleaningException.error_message)
+            # After the remaining uses becomes less than 0, the custom error message is printed out
+            # and clean_machine function is called to clean the icecream machine and
+            # the ice cream machine starts again - Kshitij Aji (ka598, Oct 23,2022)
             IceCreamMachine.clean_machine(self)
             IceCreamMachine.start(self)
         if self.remaining_scoops <= 0:
+            # Custom error message is printed out from the ExceededRemainingChoicesException
+            # Class if the remaining scoops becomes less than 0 - Kshitij Aji (ka598, Oct 23,2022)
             print(ExceededRemainingChoicesException.error_message)
         for f in self.flavors:
             if f.name.lower() == choice:
@@ -105,10 +117,13 @@ class IceCreamMachine:
                 self.remaining_scoops -= 1
                 self.remaining_uses -= 1
                 return
+        # The custom error message is displayed if the user selects an invalid choice -  Kshitij Aji (ka598, Oct 23,2022)
         print(InvalidChoiceException.error_message)
 
     def pick_toppings(self, choice):
         if self.remaining_toppings <= 0:
+            # Custom error message is printed out from the ExceededRemainingChoicesException
+            # Class if the remaining toppings becomes less than 0 - Kshitij Aji (ka598, Oct 23,2022)
             print(ExceededRemainingChoicesException.error_message)
         for t in self.toppings:
             if t.name.lower() == choice:
@@ -116,6 +131,7 @@ class IceCreamMachine:
                 self.inprogress_icecream.append(t)
                 self.remaining_toppings -= 1
                 return
+        # The custom error message is displayed if the user selects an invalid choice -  Kshitij Aji (ka598, Oct 23,2022)
         print(InvalidChoiceException.error_message)
 
     def reset(self):
@@ -152,7 +168,10 @@ class IceCreamMachine:
             self.total_sales += float(expected_int)  # only if successful
             self.reset()
         else:
+            # The custom error message is displayed if the user types an invalid payment -  Kshitij Aji (ka598, Oct 23,2022)
             print(InvalidPaymentException.error_message)
+            # The ice cream machine starts again to prompt the user to type the exact
+            # amount shown on the screen - Kshitij Aji (ka598, Oct 23,2022)
             IceCreamMachine.start(self)
 
     def calculate_cost(self):
