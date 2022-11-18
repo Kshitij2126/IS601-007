@@ -1,8 +1,6 @@
 import glob
 import os
 
-
-
 from db import DB
 print(os.path.dirname(os.path.abspath(__file__)))
 mypath = os.path.dirname(os.path.abspath(__file__))
