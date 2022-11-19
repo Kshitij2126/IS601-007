@@ -7,8 +7,6 @@ on:
   push:
     branches:
       - dev
-      - Flask-Sample-HW
-      - Flask-Sample-Pytest
       - MiniProject-2
 
 # Your workflows jobs.
