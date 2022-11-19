@@ -6,7 +6,6 @@ name: Deploy to heroku dev.
 on:
   push:
     branches:
-      - dev
       - MiniProject-2
 
 # Your workflows jobs.
