@@ -17,6 +17,15 @@ def importCSV():
             flash('No selected file', "warning")
             return redirect(request.url)
         # TODO importcsv-1 check that it's a .csv file, return a proper flash message if it's not
+
+        # Added code to check that file is in .csv format - Kshitij Aji (UCID: ka598), Nov 21, 2022
+        allowed_extension = {"csv"}
+        if file.filename.rsplit(".",1).lower() in allowed_extension:
+            pass
+        else: 
+            flash("Selected file is not in .csv format", "warning")
+            return redirect(request.url)
+
         if file and secure_filename(file.filename):
             companies = []
             employees = []
