@@ -9,6 +9,7 @@ def search():
     # TODO search-1 retrieve id, name, address, city, country, state, zip, website, employee count for the company
     # don't do SELECT *
     query = "... WHERE 1=1"
+    
     args = [] # <--- append values to replace %s placeholders
     allowed_columns = ["name", "city", "country", "state"]
     # TODO search-2 get name, country, state, column, order, limit request args

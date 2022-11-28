@@ -63,8 +63,18 @@
                   Company
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Search</a></li>
-                  <li><a class="dropdown-item" href="#">Add</a></li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{{url_for('company.search')}}"
+                      >Search</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{{url_for('company.add')}}"
+                      >Add</a
+                    >
+                  </li>
                 </ul>
               </li>
               <!-- employee dropdown nav -->
@@ -79,8 +89,18 @@
                   Employee
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Search</a></li>
-                  <li><a class="dropdown-item" href="#">Add</a></li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{{url_for('employee.search')}}"
+                      >Search</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{{url_for('employee.add')}}"
+                      >Add</a
+                    >
+                  </li>
                 </ul>
               </li>
               <!-- admin dropdown nav -->
@@ -95,7 +115,13 @@
                   Admin
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Import</a></li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{{url_for('admin.importCSV')}}"
+                      >Import</a
+                    >
+                  </li>
                 </ul>
               </li>
             </ul>

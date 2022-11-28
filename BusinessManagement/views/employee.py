@@ -2,16 +2,17 @@ from flask import Blueprint, render_template, request, flash
 from sql.db import DB
 employee = Blueprint('employee', __name__, url_prefix='/employee')
 
-
 @employee.route("/search", methods=["GET"])
 def search():
     rows = []
     # DO NOT DELETE PROVIDED COMMENTS
     # TODO search-1 retrieve employee id as id, first_name, last_name, email, company_id, company_name using a LEFT JOIN
-    query = "SELECT ... WHERE 1=1"
-    args = [] # <--- append values to replace %s placeholders
+    #query = "SELECT ... WHERE 1=1"
+    query = "SELECT id , first_name, last_name, email, company_id, company_name FROM IS601_MP2_Employees e LEFT JOIN IS601_MP2_Companies c ON e.company_id = c.id WHERE 1=1"
+    args = ["%s%"] # <--- append values to replace %s placeholders
     allowed_columns = ["first_name", "last_name", "email", "company_name"]
     # TODO search-2 get fn, ln, email, company, column, order, limit from request args
+
     # TODO search-3 append like filter for first_name if provided
     # TODO search-4 append like filter for last_name if provided
     # TODO search-5 append like filter for email if provided
@@ -64,7 +65,7 @@ def edit():
             # TODO edit-4 company may be None
             # TODO edit-5 email is required (flash proper error message)
             
-            # data = [first_name, last_name, company_id, email]
+            #data = [first_name, last_name, company_id, email]
             data.append(id)
             try:
                 # TODO edit-6 fill in proper update query
