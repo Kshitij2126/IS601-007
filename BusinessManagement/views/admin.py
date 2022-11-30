@@ -21,6 +21,7 @@ def importCSV():
         allowed_extension = {"csv"}
         if file.filename.rsplit(".")[1].lower() in allowed_extension:
             print(f"{file.filename} is in the correct format.")
+            pass
         else: 
             flash("Selected file is not in .csv format", "warning")
             return redirect(request.url)

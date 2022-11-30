@@ -5,8 +5,32 @@ content %}
   <div>
     <form method="POST">
       {# generate fields with proper types for name address city website #} {#
-      use this for country/state selection #} {% include
-      "country_state_selector.html" %}
+      use this for country/state selection #} {# Generated fields for name,
+      address, city, website and zip code - Kshitij Aji, ka598, Nov 29, 2022#}
+
+      <div class="form-group mb-3">
+        <label class="form-label" for="n">Name</label>
+        <input class="form-control" id="n" name="name" />
+      </div>
+      <div class="form-group mb-3">
+        <label class="form-label" for="add">Address</label>
+        <input class="form-control" id="add" name="address" />
+      </div>
+      <div class="form-group mb-3">
+        <label class="form-label" for="city">City</label>
+        <input class="form-control" id="city" name="city" />
+      </div>
+      <div class="form-group mb-3">
+        <label class="form-label" for="web"> Website </label>
+        <input class="form-control" id="web" name="website" />
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label" for="z"> Zip </label>
+        <input class="form-control" id="z" name="zip" />
+      </div>
+
+      {% include "country_state_selector.html" %}
       <input type="submit" class="btn btn-primary" value="Save Company" />
     </form>
   </div>

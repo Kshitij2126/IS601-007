@@ -11,6 +11,7 @@ def search():
     query = "SELECT id , first_name, last_name, email, company_id, company_name FROM IS601_MP2_Employees e LEFT JOIN IS601_MP2_Companies c ON e.company_id = c.id WHERE 1=1"
     args = ["%s%"] # <--- append values to replace %s placeholders
     allowed_columns = ["first_name", "last_name", "email", "company_name"]
+    allowed_list = [(v,v) for v in allowed_columns]
     # TODO search-2 get fn, ln, email, company, column, order, limit from request args
 
     # TODO search-3 append like filter for first_name if provided
@@ -31,7 +32,8 @@ def search():
         # TODO search-10 make message user friendly
         flash(e, "error")
     # hint: use allowed_columns in template to generate sort dropdown
-    return render_template("list_employees.html", rows=rows, allowed_columns=allowed_columns)
+    # Changed to allowed_list instead of allowed_columns - Kshitij Aji, ka598, Nov 30, 2022
+    return render_template("list_employees.html", rows=rows, allowed_list = allowed_list)
 
 @employee.route("/add", methods=["GET","POST"])
 def add():

@@ -12,6 +12,7 @@ def search():
     
     args = [] # <--- append values to replace %s placeholders
     allowed_columns = ["name", "city", "country", "state"]
+    allowed_list = [(v,v) for v in allowed_columns]
     # TODO search-2 get name, country, state, column, order, limit request args
     # TODO search-3 append a LIKE filter for name if provided
     # TODO search-4 append an equality filter for country if provided
@@ -30,7 +31,7 @@ def search():
         # TODO search-9 make message user friendly
         flash(str(e), "danger")
     # hint: use allowed_columns in template to generate sort dropdown
-    return render_template("list_companies.html", rows=rows, allowed_columns=allowed_columns)
+    return render_template("list_companies.html", rows=rows, allowed_list = allowed_list)
 
 @company.route("/add", methods=["GET","POST"])
 def add():
