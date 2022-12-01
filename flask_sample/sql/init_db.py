@@ -1,6 +1,8 @@
 import glob
 import os
 
+
+
 from db import DB
 print(os.path.dirname(os.path.abspath(__file__)))
 mypath = os.path.dirname(os.path.abspath(__file__))
@@ -39,13 +41,13 @@ for q in queries:
             print(f"Table {t} already exists, blocking query")
             continue
     try:
-        success = DB.query(sql)
+        result = DB.query(sql)
         db_calls += 1
-        print(f"Ran {'successfully' if success.status else 'unsuccessfully'}")
+        print(f"Ran {'successfully' if result.status else 'unsuccessfully'}")
     except Exception as e:
         print("An error occured (some may be expected)", e)
 if queries is None:
     queries = []
 print(f"Finished running {len(queries)} files")
 print(f"Used {db_calls} out of 10000 max quota")
-DB.db.close()
+DB.close()
