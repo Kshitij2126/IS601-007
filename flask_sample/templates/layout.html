@@ -21,13 +21,19 @@
         height: 60px;
         line-height: 60px;
       }
+
+      .header {
+        top: 0;
+        height: 60px;
+        line-height: 60px;
+      }
     </style>
     <title>{% block title %}{% endblock %} - Sample</title>
     {% endblock %}
   </head>
 
   <body>
-    <div id="header" class="header bg-light text-center">
+    <div id="header">
       <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Sample</a>
@@ -44,6 +50,20 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              {% if not current_user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('auth.login')}}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('auth.register')}}"
+                  >Register</a
+                >
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('auth.logout')}}">Logout</a>
+              </li>
+              {% endif %}
               <li class="nav-item">
                 <a class="nav-link" href="{{url_for('sample.add')}}">Add</a>
               </li>
@@ -54,6 +74,12 @@
           </div>
         </div>
       </nav>
+      {% include 'flash.html' %}
+      <style>
+        label {
+          text-transform: capitalize;
+        }
+      </style>
     </div>
     <div id="content">{% block content %}{% endblock %}</div>
     <div id="footer" class="footer bg-light text-center">
