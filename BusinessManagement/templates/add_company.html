@@ -9,25 +9,58 @@ content %}
       address, city, website and zip code - Kshitij Aji, ka598, Nov 29, 2022#}
 
       <div class="form-group mb-3">
-        <label class="form-label" for="n">Name</label>
-        <input class="form-control" id="n" name="name" />
-      </div>
-      <div class="form-group mb-3">
-        <label class="form-label" for="add">Address</label>
-        <input class="form-control" id="add" name="address" />
-      </div>
-      <div class="form-group mb-3">
-        <label class="form-label" for="city">City</label>
-        <input class="form-control" id="city" name="city" />
-      </div>
-      <div class="form-group mb-3">
-        <label class="form-label" for="web"> Website </label>
-        <input class="form-control" id="web" name="website" />
+        <label class="form-label" for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          placeholder="Enter Company Name"
+          name="name"
+        />
       </div>
 
       <div class="form-group mb-3">
-        <label class="form-label" for="z"> Zip </label>
-        <input class="form-control" id="z" name="zip" />
+        <label class="form-label" for="address">Address</label>
+        <input
+          type="text"
+          class="form-control"
+          id="address"
+          placeholder="Enter Company Address"
+          name="address"
+        />
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label" for="city">City</label>
+        <input
+          type="text"
+          class="form-control"
+          id="city"
+          placeholder="Enter company city location"
+          name="city"
+        />
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label" for="website"> Website </label>
+        <input
+          type="text"
+          class="form-control"
+          id="website"
+          placeholder="Enter Company URL "
+          name="website"
+        />
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label" for="zip"> Zip Code </label>
+        <input
+          type="text"
+          class="form-control"
+          id="zip"
+          placeholder="Enter Zip Code"
+          name="zip"
+        />
       </div>
 
       {% include "country_state_selector.html" %}
