@@ -5,8 +5,9 @@ content %}
   <div>
     <form method="POST">
       {# generate fields with proper types for name address city website and
-      prefill the fields with loaded company data #} {# use this for
-      country/state selection #} {% include "country_state_selector.html" %}
+      prefill the fields with loaded company data #} {#Generated fields for name
+      address city website and prefill the fields with loaded company data -
+      Kshitij Aji, ka598, Dec 03, 2022#}
 
       <div class="form-group mb-3">
         <label class="form-label" for="name">Name</label>
@@ -67,6 +68,9 @@ content %}
           value="{{row.zip}}"
         />
       </div>
+
+      {# use this for country/state selection #} {% include
+      "country_state_selector.html" %}
 
       <input type="submit" class="btn btn-primary" value="Save Company" />
     </form>
