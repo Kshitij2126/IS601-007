@@ -111,8 +111,8 @@ def add():
             except Exception as e:
                 # TODO add-9 make message user friendly
                 # Added the flash message - Kshitij Aji, ka598, Dec 03 2022
-                print('There was an error while adding the employee',e)
-                flash('There was an error while adding the employee', "danger")
+                print('There was an error while adding the company',e)
+                flash('There was an error while adding the company', "danger")
     return render_template("add_company.html")
 
 
