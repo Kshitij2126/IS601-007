@@ -21,7 +21,7 @@ def importCSV():
         # TODO importcsv-1 check that it's a .csv file, return a proper flash message if it's not
         # Added code to check that file is in .csv format - Kshitij Aji (UCID: ka598), Nov 21, 2022
         if not re.search(r'.\.csv',file.filename):
-            flash("The file selected is not in CSV format, please select a file that is in csv format.","Warning")
+            flash("The file selected is not in CSV format, please select a file that is in csv format.","warning")
             return redirect(request.url)
         '''
         allowed_extension = {"csv"}
@@ -42,7 +42,8 @@ def importCSV():
             """
             employee_query = """
              INSERT INTO IS601_MP2_Employees (first_name, last_name, email, company_id)
-                        VALUES (%(first_name)s, %(last_name)s, %(email)s, (SELECT id FROM IS601_MP2_Companies WHERE name = %(company_name)s LIMIT 1))
+                        VALUES (%(first_name)s, %(last_name)s, %(email)s, 
+                        (SELECT id FROM IS601_MP2_Companies WHERE name = %(company_name)s LIMIT 1))
                         ON DUPLICATE KEY UPDATE first_name=%(first_name)s, last_name = %(last_name)s, email = %(email)s, company_id = (SELECT id FROM IS601_MP2_Companies WHERE name = %(company_name)s LIMIT 1)
             """
             # Note: this reads the file as a stream instead of requiring us to save it
@@ -59,7 +60,8 @@ def importCSV():
                 # TODO importcsv-4 extract employee data and append to employee list as a dict only with employee data
                 # Added employee data to the employee list - Kshitij Aji, ka598, Nov 21, 2022
                 if row["first_name"] and row["last_name"] and row["email"] and row["company_name"]:
-                    employees.append({'first_name': row['first_name'],'last_name': row['last_name'],'email': row['email'],'company_name':row['company_name']})
+                    employees.append({'first_name': row['first_name'],'last_name': row['last_name'],\
+                        'email': row['email'],'company_name':row['company_name']})
 
             if len(companies) > 0:
                 print(f"Inserting or updating {len(companies)} companies")
