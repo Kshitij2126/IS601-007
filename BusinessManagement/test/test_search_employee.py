@@ -66,14 +66,14 @@ def test_filter_fn(client):
     target = "first_name"
     query = f"SELECT {target} FROM IS601_MP2_Employees e LEFT JOIN IS601_MP2_Companies c ON e.company_id = c.id WHERE {target} like %s LIMIT 10"
     args = ["%a%"]
-    url = f"/employee/search?fn={args[0].replace('%','')}"
+    url = f"/employee/search?first_name={args[0].replace('%','')}"
     query_and_get_assert(query=query, args=args, target=target, client=client, url=url)
 
 def test_filter_ln(client):
     target = "last_name"
     query = f"SELECT {target} FROM IS601_MP2_Employees e LEFT JOIN IS601_MP2_Companies c ON e.company_id = c.id WHERE {target} like %s LIMIT 10"
-    args = ["%v%"]
-    url = f"/employee/search?ln={args[0].replace('%','')}"
+    args = ["%d%"]
+    url = f"/employee/search?last_name={args[0].replace('%','')}"
     query_and_get_assert(query=query, args=args, target=target, client=client, url=url)
     
 

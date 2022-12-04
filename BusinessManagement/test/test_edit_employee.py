@@ -36,7 +36,9 @@ def runner(app):
 @pytest.mark.order("second_to_last")
 def test_edit_employee(client):
     resp = client.post("/employee/edit?id=-1", data={
+        "first_name":"_test2",
         "last_name": "_test2",
+        "email":"_test@email.com",
         "company": -1
     }, follow_redirects=True )
     assert resp.status_code == 200
@@ -50,3 +52,4 @@ def test_edit_employee(client):
     assert ele.get("value") == '_test2'
     ele = form.select("[name='company']")[0]
     assert int(ele.get("value")) == -1 
+

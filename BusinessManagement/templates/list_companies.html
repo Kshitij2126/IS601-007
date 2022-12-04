@@ -58,6 +58,7 @@ block content %}
           <th>State</th>
           <th>Zip</th>
           <th>Website</th>
+          <th>Employees</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -79,6 +80,7 @@ block content %}
           <td>{{row.state}}</td>
           <td>{{row.zip}}</td>
           <td><a href="{{row.website}}">{{row.website}}</a></td>
+          <td>{{row.employees}}</td>
           <td>
             <a
               href="/company/search?company_name={{row.name}}"
