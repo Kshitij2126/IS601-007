@@ -23,7 +23,7 @@ def importCSV():
         if not re.search(r'.\.csv',file.filename):
             flash("The file selected is not in CSV format, please select a file that is in csv format.","warning")
             return redirect(request.url)
-        '''
+        
         allowed_extension = {"csv"}
         if file.filename.rsplit(".")[1].lower() in allowed_extension:
             print(f"{file.filename} is in the correct format.")
@@ -31,7 +31,7 @@ def importCSV():
         else: 
             flash("Selected file is not in .csv format", "warning")
             return redirect(request.url)
-        '''
+        
         if file and secure_filename(file.filename):
             companies = []
             employees = []
