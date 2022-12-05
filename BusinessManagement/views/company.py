@@ -168,7 +168,7 @@ def edit():
                     flash("The record has been updated. ", "success")
             except Exception as e:
                 # TODO edit-10 make this user-friendly
-                # Added flash message -  - Kshitij Aji, ka598, Dec 03 2022
+                # Added flash message to make it user firendly  - Kshitij Aji, ka598, Dec 03 2022
                 print('An error occurred during updation of company',e)
                 flash('An error occurred during updation of company', "danger")
         try:
