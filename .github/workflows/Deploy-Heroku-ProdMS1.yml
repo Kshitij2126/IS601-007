@@ -16,7 +16,7 @@ jobs:
       DB_URL: ${{secrets.DB_URL}}
       PORT: 8080
       # change to the project directory you're deploying
-      WORKING_DIRECTORY: BusinessManagement
+      WORKING_DIRECTORY: flask_sample
     defaults:
       run:
         working-directory: ${{env.WORKING_DIRECTORY}}
@@ -45,7 +45,7 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
 
           # Name of the heroku application to which the build is to be sent.
-          heroku_app_name: ${{ secrets.HEROKU_APP_NAME_PROD }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME_PROD2}}
 
           # (Optional, default: "./")
           # Dockerfile directory.
