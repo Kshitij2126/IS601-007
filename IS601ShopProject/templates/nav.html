@@ -34,16 +34,16 @@
           <a class="nav-link" href="{{url_for('auth.profile')}}">Profile</a>
         </li>
         <!-- samples nav -->
-        {% set samples = [ ("sample.add", "Add"), ("sample.list", "List"), ] %}
-        {{dropdown_nav("Samples", samples)}}
+        {# {% set samples = [ ("sample.add", "Add"), ("sample.list", "List"), ]
+        %} {{dropdown_nav("Samples", samples)}} #}
         <!-- roles nav (requires admin )-->
         {% if current_user.has_role("Admin") %} {% set roles = [ ("roles.add",
         "Add"), ("roles.list", "List"), ("roles.assign", "Assign") ] %}
         {{dropdown_nav("Roles", roles)}} {% endif %}
         <!-- items nav (requires admin )-->
         {% if current_user.has_role("Admin") %} {% set roles = [ ("shop.item",
-        "Add"), ("shop.items", "List") ] %} {{dropdown_nav("Items", roles)}} {%
-        endif %}
+        "Add"), ("shop.items", "List") ] %} {{dropdown_nav("Products", roles)}}
+        {% endif %}
         <li class="nav-item">
           <a class="nav-link" href="{{url_for('auth.logout')}}">Logout</a>
         </li>

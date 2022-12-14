@@ -38,8 +38,8 @@ def create_app(config_filename=''):
     login_manager.init_app(app)
     # app.config.from_pyfile(config_filename)
     with app.app_context():
-        from views.sample import sample
-        app.register_blueprint(sample)
+        from views.home import home
+        app.register_blueprint(home)
         from auth.auth import auth
         app.register_blueprint(auth)
         from roles.roles import roles

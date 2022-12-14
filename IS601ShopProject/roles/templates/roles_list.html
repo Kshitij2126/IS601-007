@@ -6,18 +6,18 @@
     <table class="table">
         {% if rows and rows|length > 0 %}
         <thead>
-            <tr class="text-capitalize">
+            <tr style="color:White;" class="text-capitalize">
                 {% for r in rows[0] %}
-                <th>{{r}}</th>
+                <th style="color:White;">{{r}}</th>
                 {% endfor %}
             </tr>
         </thead>
         {% for r in rows %}
-        <tr>
+        <tr style="color:White;">
             {% for v in r.values() %}
-            <td>{{v}}</td>
+            <td style="color:White;">{{v}}</td>
             {% endfor %}
-            <td><a href="{{url_for('roles.edit', id=r.get('id'))}}"
+            <td style="color:White;"><a href="{{url_for('roles.edit', id=r.get('id'))}}"
                     class="btn btn-secondary btn-sm">Edit</a>
                 {# **request.args spreads the key value pairs to be part of the url#}
                 {# the idea is to pass it to the next route #}
@@ -27,7 +27,7 @@
         </tr>
         {% endfor %}
         {% else %}
-        <p>No results to show</p>
+        <p style="color:White;">No results to show</p>
         {% endif %}
     </table>
 </div>

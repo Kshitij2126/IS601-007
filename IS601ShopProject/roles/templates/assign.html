@@ -16,68 +16,68 @@
     <table class="table">
         <thead>
             <tr>
-                <td>Users</td>
-                <td>Roles</td>
+                <td style="color:White;">Users</td>
+                <td style="color:White;">Roles</td>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>
+                <td style="color:White;">
                     <!-- users -->
-                    <table class="table">
+                    <table style="color:White;"class="table">
                         {% set rows = users %}
                         {% if rows and rows|length > 0 %}
                         <thead>
-                            <tr class="text-capitalize">
+                            <tr style="color:White;"class="text-capitalize">
                                 {% for r in rows[0] %}
-                                <th>{{r}}</th>
+                                <th style="color:White;">{{r}}</th>
                                 {% endfor %}
-                                <th>Select</th>
+                                <th style="color:White;">Select</th>
                             </tr>
                         </thead>
                         {% for r in rows %}
-                        <tr>
+                        <tr style="color:White;">
                             {% for v in r.values() %}
-                            <td>{{v}}</td>
+                            <td style="color:White;">{{v}}</td>
                             {% endfor %}
-                            <td>
+                            <td style="color:White;">
                                 <input form="apply" type="checkbox" class="form-check"
                                     name="users[]" value="{{r.get('id')}}" />
                             </td>
                         </tr>
                         {% endfor %}
                         {% else %}
-                        <p>No results to show</p>
+                        <p style="color:White;">No results to show</p>
                         {% endif %}
                     </table>
                     <!-- end users -->
                 </td>
-                <td>
+                <td style="color:White;">
                     <!-- roles -->
                     <table class="table">
                         {% set rows = roles %}
                         {% if rows and rows|length > 0 %}
                         <thead>
-                            <tr class="text-capitalize">
+                            <tr style="color:White;" class="text-capitalize">
                                 {% for r in rows[0] %}
-                                <th>{{r}}</th>
+                                <th style="color:White;">{{r}}</th>
                                 {% endfor %}
-                                <th>Select</th>
+                                <th style="color:White;">Select</th>
                             </tr>
                         </thead>
                         {% for r in rows %}
-                        <tr>
+                        <tr style="color:White;">
                             {% for v in r.values() %}
-                            <td>{{v}}</td>
+                            <td style="color:White;">{{v}}</td>
                             {% endfor %}
-                            <td>
+                            <td style="color:White;">
                                 <input form="apply" type="checkbox" class="form-check"
                                     name="roles[]" value="{{r.get('id')}}" />
                             </td>
                         </tr>
                         {% endfor %}
                         {% else %}
-                        <p>No results to show</p>
+                        <p style="color:White;">No results to show</p>
                         {% endif %}
                     </table>
                     <!-- end roles -->
