@@ -280,7 +280,13 @@ def purchase():
         flash("Something went wrong", "danger")
         traceback.print_exc()
     # TODO route to thank you / summary page
-
+    # Added route to thank you / summary page - Kshitij Aji, ka598, December 15 2022.
+    '''
+    @shop.route("cart/ordersummary", methods=["GET", "POST"])
+    @login_required
+    def order_summary():
+        return render_template("order_summary.html",rows=cart, order=order)
+    '''
     # TODO add link from cart page to this route
     return render_template("order_summary.html", rows=cart, order=order)
 
