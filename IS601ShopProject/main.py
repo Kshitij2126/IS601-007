@@ -46,10 +46,6 @@ def create_app(config_filename=''):
         app.register_blueprint(roles)
         from shop.shop import shop
         app.register_blueprint(shop)
-        '''
-        from auth.payment import payment
-        app.register_blueprint(payment)
-        '''
         # load the extension
         # must be defined/initialized for identity to work (flask_principal)
         principals = Principal(app)
