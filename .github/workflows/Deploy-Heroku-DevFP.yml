@@ -6,7 +6,7 @@ name: Deploy to heroku dev.
 on:
   push:
     branches:
-      - MileStone-2
+      - MileStone-3
 
 # Your workflows jobs.
 jobs:
