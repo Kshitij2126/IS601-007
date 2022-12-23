@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+{% block title %}Cart{% endblock %}
+
+<!-- content -->
+{% block content %}
+<div class="container-fluid">
+    <div class="h4">Cart</div>
+    <p>Click on the product name for more details</p>
+    <table class="table text-dark bg-light">
+        <thread>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th>Actions</th>
+            </tr>
+        </thread>
+        <tbody>
+            {% set ns = namespace(total=0) %}
+            {% for row in rows %}
+            <tr>
+                <td>
+                    <b>
+                        <a href="{{url_for('shop.itemdetails', id=row['id'])}}" style="text-decoration: none; color:cornflowerblue">
+                            {{row["name"]}}
+                        </a>
+                    </b>
+                </td>
+                <td style="width:10em">
+                    <form method="POST">
+                        <div class="row">
+                            <input type="hidden" name="item_id" value="{{row['product_id']}}" />
+                            <div class="col">
+                                <input type="number" class="form-control" name="quantity" min="0"
+                                    value="{{row['desired_quantity']}}" />
+                            </div>
+                            <div class="col d-grid">
+                                <input type="submit" value="Update"
+                                    class="btn btn-secondary btn-sm" />
+                            </div>
+                        </div>
+                    </form>
+                </td>
+                <td>{{row['subtotal']}}</td>
+                <td>
+                    <!-- lazy delete using quantity < 0 logic -->
+                    <form method="POST">
+                        <input type="hidden" name="item_id" value="{{row['product_id']}}" />
+                        <input type="hidden" name="quantity" value="-1" />
+                        <input type="submit" value="x" class="btn btn-danger btn-sm" />
+                    </form>
+                </td>
+                {# https://stackoverflow.com/a/51880609 #}
+                {% set ns.total = ns.total + row['subtotal'] %}
+            </tr>
+            {% endfor %}
+            <tr>
+                <td class="text-end" colspan="100%">
+                    Total: {{ns.total or 0}}
+                </td>
+            </tr>
+            <tr>
+                <td class="text-start">
+                    <a href="{{url_for('shop.cart', delete_all=1)}}" class="btn btn-danger">Clear Cart</a>
+                </td>
+                <td class="text-end" colspan="100%">
+                    {# Note: Shop people need an order form page prior to doing the checkout process,
+                    my example skips that since I don't record address/payment details #}
+                    <a href="{{url_for('shop.checkout')}}" class="btn btn-primary">Proceed to Checkout</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

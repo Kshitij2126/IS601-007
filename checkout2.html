@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+{% from "_formhelpers.html" import render_field %}
+<div class="container-fluid">
+    <div class="h3">Checkout</div>
+    <table class="table text-dark bg-light">
+        <thread>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+            </tr>
+        </thread>
+        <tbody>
+            {% set ns = namespace(total=0) %}
+            {% for row in rows %}
+            <tr>
+                <td>
+                    <b>
+                        <a href="{{url_for('shop.itemdetails', id=row['id'])}}" style="text-decoration: none; color:cornflowerblue">
+                            {{row["name"]}}
+                        </a>
+                    </b><br>
+                    {% if row['unit_price'] > row['item_cost'] %}
+                        <p style="color:green">The price decreased by {{(row['unit_price']-row['item_cost'])/row['unit_price']|round}}%</p>
+                    {% elif row['unit_price'] < row['item_cost'] %}
+                        <p style="color:red">The price increased by {{(row['item_cost']-row['unit_price'])/row['item_cost']|round}}%</p>
+                    {% endif %}
+                </td>
+                <td>{{row['desired_quantity']}}</td>
+                <td>{{row['unit_price']}}</td>
+                <td>{{row['subtotal']}}</td>
+                {# https://stackoverflow.com/a/51880609 #}
+                {% set ns.total = ns.total + row['subtotal'] %}
+            </tr>
+            {% endfor %}
+            <tr>
+                <td class="text-end" colspan="100%">
+                    Total: {{ns.total or 0}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="{{url_for('shop.cart')}}">&lt Back to Cart</a>
+    <form action="{{url_for('shop.purchase')}}" method="POST">
+        <table width="70%" margin="5px" style="border-spacing:40px; margin-left: auto; margin-right: auto;">
+            <thead>
+                <th style="border-right: 1px solid #000">Billing Information</th>
+                <th colspan="2" style="width:40em">Shipping Address</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border-right: 1px solid #000">{{render_field(form.paymentmethod)}}</td>
+                    <td>{{render_field(form.fname)}}</td>
+                    <td>{{render_field(form.lname)}}</td>
+                </tr>
+                <tr>
+                    <td style="border-right: 1px solid #000">{{render_field(form.amount)}}</td>
+                    <td colspan="2">{{render_field(form.apt)}}</td>
+                </tr>
+                <tr>
+                    <td style="border-right: 1px solid #000"></td>
+                    <td colspan="2">{{render_field(form.city)}}</td>
+                </tr>
+                <tr>
+                    <td style="border-right: 1px solid #000"></td>
+                    <td colspan="2">{{render_field(form.state)}}</td>
+                </tr>
+                <tr>
+                    <td style="border-right: 1px solid #000"></td>
+                    <td colspan="2">{{render_field(form.country)}}</td>
+                </tr>
+                <tr>
+                    <td style="border-right: 1px solid #000"></td>
+                    <td colspan="2">{{render_field(form.zpcode)}}</td>
+                </tr>
+            </tbody>
+        </table>
+        {{form.submit(class="btn btn-primary")}}
+    </form>
+</div>
+{% endblock %}
